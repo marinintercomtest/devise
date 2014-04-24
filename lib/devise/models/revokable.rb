@@ -13,14 +13,14 @@ module Devise
         !active_sessions.include?(revokable_token)
       end
 
-      def max_revokable_sessions
-        self.class.max_revokable_sessions
+      def max_concurrent_sessions
+        self.class.max_concurrent_sessions
       end
 
       private
 
       module ClassMethods
-        Devise::Models.config(self, :max_revokable_sessions)
+        Devise::Models.config(self, :max_concurrent_sessions)
       end
     end
   end

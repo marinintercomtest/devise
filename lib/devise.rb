@@ -133,9 +133,9 @@ module Devise
   mattr_accessor :expire_auth_token_on_timeout
   @@expire_auth_token_on_timeout = false
 
-  # Maximum number of revokable sessions we track before discarding old sessions
-  mattr_accessor :max_revokable_sessions
-  @@max_revokable_sessions = 10
+  # Maximum number of concurrent sessions we can track via the revokable module
+  mattr_accessor :max_concurrent_sessions
+  @@max_concurrent_sessions = 15
 
   # Used to encrypt password. Please generate one with rake secret.
   mattr_accessor :pepper
