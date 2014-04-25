@@ -36,6 +36,9 @@ class CreateTables < ActiveRecord::Migration
       ## Token authenticatable
       t.string :authentication_token
 
+      ## Revokable
+      t.text :active_sessions
+
       t.timestamps
     end
 

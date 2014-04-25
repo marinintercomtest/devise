@@ -2,9 +2,11 @@ module SharedUser
   extend ActiveSupport::Concern
 
   included do
+    serialize :active_sessions, Array
+
     devise :database_authenticatable, :confirmable, :lockable, :recoverable,
            :registerable, :rememberable, :timeoutable, :token_authenticatable,
-           :trackable, :validatable, :omniauthable
+           :trackable, :validatable, :omniauthable, :revokable
 
     attr_accessor :other_key
 
