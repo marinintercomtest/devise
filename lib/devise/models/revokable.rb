@@ -10,7 +10,8 @@ module Devise
       end
 
       def revoked?(revokable_token)
-        !active_sessions.include?(revokable_token)
+        false
+        #!active_sessions.include?(revokable_token)
       end
 
       def max_concurrent_sessions
