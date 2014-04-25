@@ -5,7 +5,7 @@ Warden::Manager.after_set_user :except => :fetch do |record, warden, options|
   if record && record.respond_to?(:revoked?) && options[:store] != false && !env['devise.skip_revokable']
     revokable_token = SecureRandom.hex
     record.active_sessions << revokable_token unless record.active_sessions.include? revokable_token
-    record.active_sessions.last(record.max_concurrent_sessions)
+    record.active_sessions = record.active_sessions.last(record.max_concurrent_sessions)
     record.save
     warden.cookies.signed["revokable_token"] = revokable_token
   end
