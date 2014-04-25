@@ -29,7 +29,7 @@ end
 Warden::Manager.before_logout do |record, warden, options|
   env = warden.request.env
 
-  if record && record.respond_to?(:revoked?) && options[:store] != false && !env['devise.skip_revokable`']
+  if record && record.respond_to?(:revoked?) && options[:store] != false && !env['devise.skip_revokable']
     revokable_token = warden.cookies.signed["revokable_token"]
     record.active_sessions.delete(revokable_token)
     record.save
