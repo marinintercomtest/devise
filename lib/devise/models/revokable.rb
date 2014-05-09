@@ -12,7 +12,7 @@ module Devise
       def activate_revokable_session
         revokable_token = SecureRandom.hex
         active_sessions << revokable_token unless active_sessions.include? revokable_token
-        active_sessions.last(max_concurrent_sessions)
+        active_sessions = active_sessions.last(max_concurrent_sessions)
         save
         revokable_token
       end
