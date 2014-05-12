@@ -51,4 +51,15 @@ class SessionRevocationTest < ActionDispatch::IntegrationTest
     get users_path
     assert_nil revokable_token_signed_cookie
   end
+
+  test 'user active sessions is capped' do
+    user = create_user
+    Devise.max_concurrent_sessions.times { user.activate_revokable_session }
+    sign_in_as_user
+
+    get users_path
+    assert response.code.to_i == 200
+
+    assert_equal(Devise.max_concurrent_sessions, user.reload.active_sessions.count)
+  end
 end
